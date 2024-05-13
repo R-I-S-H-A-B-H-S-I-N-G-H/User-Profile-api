@@ -1,8 +1,7 @@
 const { get, create, update, login } = require("../services/UserService");
 
 exports.get = async (req, res) => {
-	const { id } = req.params;
-	console.log(id);
+	const { id } = req.query;
 	const user = await get(id);
 	res.json(user);
 };

@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const User = require("../Models/User");
 const { encodePassword, comparePassword } = require("../Utils/PasswordUtil");
+const { generateAuthToken } = require("../Utils/JwtUtil");
 
 exports.get = async (id) => {
 	if (!mongoose.isValidObjectId(id)) return { msg: "invalid object id" };
@@ -18,7 +19,8 @@ exports.login = async (username, password) => {
 
 	const isValidPassword = await comparePassword(password, user.password);
 	if (isValidPassword !== true) return { msg: "Incorrect password" };
-	return user;
+	const tokenPayload = { id: user._id, ROLE: user.role };
+	return { token: generateAuthToken(tokenPayload) };
 };
 
 exports.create = async (user = User) => {
