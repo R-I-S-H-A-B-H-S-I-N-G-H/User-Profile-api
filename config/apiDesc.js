@@ -1,5 +1,5 @@
 exports.ApiDesc = {
-	TITLE: "API DESCRIPTION",
+	TITLE: "API DESCRIPTION v1",
 	"/user/{id}": {
 		method: "GET",
 		param: ["id"],
