@@ -1,8 +1,14 @@
-const { get, create, update, login } = require("../services/UserService");
+const { get, create, update, login, getList } = require("../services/UserService");
 
 exports.get = async (req, res) => {
 	const { id } = req.query;
 	const user = await get(id);
+	res.json(user);
+};
+
+exports.list = async (req, res) => {
+	const { id } = req.query;
+	const user = await getList(id);
 	res.json(user);
 };
 

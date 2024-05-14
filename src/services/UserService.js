@@ -13,6 +13,18 @@ exports.get = async (id) => {
 	}
 };
 
+exports.getList = async (id) => {
+	try {
+		const filter = {};
+		if (id) filter.isPublic = true;
+		const userList = (await User.find(filter)) || [];
+
+		return userList.map(ele => ele.profile);
+	} catch (error) {
+		return { error: error };
+	}
+};
+
 exports.login = async (username, password) => {
 	const user = await User.findOne({ "profile.username": username });
 	if (!user) return { msg: "user not found" };
