@@ -13,13 +13,14 @@ exports.get = async (id) => {
 	}
 };
 
-exports.getList = async (id) => {
+exports.getList = async (props) => {
+	const { isAdmin = false } = props;
 	try {
 		const filter = {};
-		if (id) filter.isPublic = true;
+		if (!isAdmin) filter.isPublic = true;
 		const userList = (await User.find(filter)) || [];
 
-		return userList.map(ele => ele.profile);
+		return userList.map((ele) => ({ ...ele.profile, _id: ele._id, isPublic: ele.isPublic }));
 	} catch (error) {
 		return { error: error };
 	}
@@ -44,5 +45,6 @@ exports.create = async (user = User) => {
 
 exports.update = async (user = User) => {
 	if (!mongoose.isValidObjectId(user.id)) return { msg: "invalid object id" };
+	console.log("UPDATE SERVICE", user);
 	return User.updateOne({ _id: user.id }, user);
 };

@@ -6,7 +6,11 @@ exports.generateAuthToken = (data) => {
 };
 
 exports.verifyToken = (token) => {
-	return jwt.verify(token, SECRET_KEY);
+	try {
+		return jwt.verify(token, SECRET_KEY);
+	} catch (e) {
+		return false;
+	}
 };
 
 exports.decodeToken = (token) => {

@@ -1,14 +1,14 @@
 const { get, create, update, login, getList } = require("../services/UserService");
 
 exports.get = async (req, res) => {
-	const { id } = req.query;
+	const { id } = req.params;
 	const user = await get(id);
 	res.json(user);
 };
 
 exports.list = async (req, res) => {
-	const { id } = req.query;
-	const user = await getList(id);
+	const { id } = req.params;
+	const user = await getList(req);
 	res.json(user);
 };
 
@@ -25,8 +25,9 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+	console.log("UPDATE CONTROLLER");
 	const user = req.body;
-	user.id = req.query.id;
+	user.id = req.params.id;
 	const result = await update(user);
 	res.json(result);
 };
