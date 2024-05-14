@@ -26,6 +26,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
 	const user = req.body;
+	user.id = req.query.id;
 	const result = await update(user);
 	res.json(result);
 };
