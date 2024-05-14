@@ -1,16 +1,16 @@
 exports.ApiDesc = {
 	TITLE: "API DESCRIPTION v1",
-	"/user/{id}": {
+	"GET[/user/{id}]": {
 		method: "GET",
 		param: ["id"],
 		auth: "jwt-token",
 	},
-	"/user/list": {
+	"GET[/user/list]": {
 		method: "GET",
 		auth: "jwt-token",
 		description: "gets all the profiles of public user for normal user and all the profiles of users Public/Private for ADMIN user",
 	},
-	"/user": {
+	"POST[/user]": {
 		method: "POST",
 		auth: "jwt-token",
 		body: {
@@ -24,14 +24,14 @@ exports.ApiDesc = {
 			role: "USER",
 		},
 	},
-	"/user/login": {
+	"POST[/user/login]": {
 		method: "POST",
 		body: {
 			password: "password",
 			username: "user",
 		},
 	},
-	"/user/{id}": {
+	"PUT[/user/{id}]": {
 		method: "PUT",
 		body: {
 			profile: {
